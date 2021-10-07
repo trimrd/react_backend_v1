@@ -1,0 +1,25 @@
+.list .action {
+  cursor: pointer;
+}
+
+.submit-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.edit-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.fa-edit {
+  color: #0080ff;
+}
+
+td[role="cell"] span {
+  margin-right: 10px;
+}
+
+.fa-trash {
+  color: red;
+}
