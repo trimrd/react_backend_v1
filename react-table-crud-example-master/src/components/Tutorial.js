@@ -3,7 +3,7 @@ import TutorialDataService from "../services/TutorialService";
 import {useHistory} from "react-router-dom";
 import {
   makeStyles,
-  createMuiTheme,
+  createTheme,
   ThemeProvider
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -11,12 +11,17 @@ import Container from "@material-ui/core/Container";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { purple } from "@material-ui/core/colors";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const Tutorial = props => {
   const initialTutorialState = {
     id: null,
     title: "",
     description: "",
+    povrsina: "",
+    duzina: "",
+    sirina: "",
     parking: false,
     wifi: false,
     struja: false,
@@ -43,6 +48,17 @@ const Tutorial = props => {
 
   const handleInputChange = event => {
     const {name, value} = event.target;
+    setCurrentTutorial({
+      ...currentTutorial,
+      [name]: value
+    });
+  };
+
+  const handleCheckBoxChange = event => {
+    const name = event.target.name;
+    const value = event.target.checked;
+    console.log('Name: ', name);
+    console.log('Vrijednost: ', value);
     setCurrentTutorial({
       ...currentTutorial,
       [name]: value
@@ -98,7 +114,7 @@ const Tutorial = props => {
     }
   }));
 
-  const defaultTheme = createMuiTheme({
+  const defaultTheme = createTheme({
     palette: {
       primary: {
       // Purple and green play nicely together.
@@ -154,6 +170,35 @@ const Tutorial = props => {
                   : "Pending"
               }
             </div>
+
+            <FormControlLabel control={<Checkbox
+              checked = {
+                currentTutorial.parking
+              }
+              name = "parking"
+              onChange = {
+                handleCheckBoxChange
+              }
+              />} label="Parking"/>
+            <FormControlLabel control={<Checkbox
+              checked = {
+                currentTutorial.wifi
+              }
+              onChange = {
+                handleCheckBoxChange
+              }
+              name = "wifi"
+              />} label="WiFi"/>
+            <FormControlLabel control={<Checkbox
+              checked = {
+                currentTutorial.struja
+              }
+              onChange = {
+                handleCheckBoxChange
+              }
+              name = "struja"
+              />} label="Struja"/>
+
           </form>
 
           {
